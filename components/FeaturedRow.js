@@ -4,7 +4,7 @@ import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
 import sanityClient from '../sanity'
 
-export default function FeaturedRow({ id, title, description, featuredCategory}) {
+export default function FeaturedRow({ id, title, description}) {
   const [restaurants, setRestaurants] = useState([])
   useEffect(()=>{
     sanityClient.fetch(`
@@ -12,8 +12,9 @@ export default function FeaturedRow({ id, title, description, featuredCategory})
         ...,
         restaurants[]->{
           ...,
-          dish[]->{
-            ...
+          dishes[]->,
+          type->{
+            name
           }
         }
       }[0]
@@ -22,7 +23,6 @@ export default function FeaturedRow({ id, title, description, featuredCategory})
     )
     .then(data=>setRestaurants(data?.restaurants))
 },[id])
-
   return (
     <View>
         <View className="mt-4 flex-row items-center justify-between px-4">
